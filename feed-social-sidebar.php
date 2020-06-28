@@ -1,6 +1,6 @@
 <?php
 /*
-  Plugin Name: Social bar
+  Plugin Name: Feed Social sidebar
   Description: Social sidebar widget
   Author: COQUARD Cyrille
   Version: 1.0.0
@@ -43,7 +43,7 @@ function enqueue_style(){
     wp_enqueue_style( 'social_bar_main_css', plugins_url('assets/css/main.css',__FILE__ ), false, '1.0.0', 'all');
 }
 
-class SocialBarWidget extends WP_Widget {
+class FeedSocialSidebarWidget extends WP_Widget {
 
     function __construct() {
         parent::__construct(
@@ -168,10 +168,10 @@ class SocialBarWidget extends WP_Widget {
     }
 }
 
-add_action( 'widgets_init', 'register_social_bar_widget' );
+add_action( 'widgets_init', 'register_feed_social_sidebar_widget' );
 
-function register_social_bar_widget() {
-    register_widget( 'SocialBarWidget' );
+function register_feed_social_sidebar_widget() {
+    register_widget( 'FeedSocialSidebarWidget' );
 }
 
 API::init();
