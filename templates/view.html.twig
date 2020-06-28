@@ -1,0 +1,34 @@
+<div class="tweets_list">
+    <div>
+        {% if activate_twitter %}
+            <div class="tweets_list_btn">
+                <div class="fab fa-twitter">
+                </div>
+            </div>
+        {% endif %}
+        {% if activate_instagram %}
+            <div class="instagram_list_btn">
+                <div class="fab fa-instagram">
+                </div>
+            </div>
+        {% endif %}
+        {% if activate_pinterest %}
+            <div class="pinterest_list_btn">
+                <div class="fab fa-pinterest">
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    {% if activate_twitter %}
+        <div class="tweets_list_list tweets_list_top" id="twitter-list-container" data-account="{{ name_twitter }}">
+        </div>
+    {% endif %}
+    {% if activate_instagram %}
+        <div class="tweets_list_list tweets_list_top" id="instagram-list-container" data-account="{{ name_instagram }}">
+        </div>
+    {% endif %}
+    {% if activate_pinterest %}
+        <div class="tweets_list_list tweets_list_top" id="pinterest-list-container" data-account="{{ name_pinterest }}">
+        </div>
+    {% endif %}
+</div>
