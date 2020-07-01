@@ -21,7 +21,7 @@ along with Social bar. If not, see https://www.gnu.org/licenses/old-licenses/gpl
 */
 
 use Timber\Timber;
-use SOCIAL_BAR\API;
+use FEED_SOCIAL_SIDEBAR\API;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -30,26 +30,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 require_once( __DIR__ . '/vendor/autoload.php' );
 $timber = new Timber();
 
-define('SOCIAL_BAR', true);
+define('FEED_SOCIAL_SIDEBAR', true);
 
 add_action('wp_enqueue_scripts', 'enqueue_style');
 
 function enqueue_style(){
-    wp_enqueue_script('social_bar_main_js', plugins_url( 'assets/js/main.js', __FILE__ ), array('jquery'), '1.0.0', true);
-    wp_enqueue_script('social_bar_instagram_main_js', plugins_url( 'assets/js/jquery.instagramFeed.min.js', __FILE__ ), array('jquery'), '1.0.0', true);
-    wp_enqueue_script('isotope', plugins_url( 'assets/js/isotope.js', __FILE__ ), array('jquery'), '1.0.0', true);
-    wp_enqueue_script('social_bar_pinterest_main_js', plugins_url( 'assets/js/pinterest.js', __FILE__ ), array('jquery', 'isotope'), '1.0.0', true);
-    wp_enqueue_style( 'social_bar_awesome', plugins_url('assets/css/all.min.css',__FILE__ ), false, '1.0.0', 'all');
-    wp_enqueue_style( 'social_bar_main_css', plugins_url('assets/css/main.css',__FILE__ ), false, '1.0.0', 'all');
+    wp_enqueue_script('feed_social_sidebar_main_js', plugins_url( 'assets/js/main.js', __FILE__ ), array('jquery'), '1.0.0', true);
+    wp_enqueue_script('feed_social_sidebar_instagram_main_js', plugins_url( 'assets/js/jquery.instagramFeed.min.js', __FILE__ ), array('jquery'), '1.0.0', true);
+    wp_enqueue_script('feed_social_sidebar_isotope', plugins_url( 'assets/js/isotope.js', __FILE__ ), array('jquery'), '1.0.0', true);
+    wp_enqueue_script('feed_social_sidebar_pinterest_main_js', plugins_url( 'assets/js/pinterest.js', __FILE__ ), array('jquery', 'feed_social_sidebar_isotope'), '1.0.0', true);
+    wp_enqueue_style( 'feed_social_sidebar_awesome', plugins_url('assets/css/all.min.css',__FILE__ ), false, '1.0.0', 'all');
+    wp_enqueue_style( 'feed_social_sidebar_main_css', plugins_url('assets/css/main.css',__FILE__ ), false, '1.0.0', 'all');
 }
 
 class FeedSocialSidebarWidget extends WP_Widget {
 
     function __construct() {
         parent::__construct(
-            'social_bar_widget',
-            esc_html__( 'Social Networks sidebar', 'social_bar_widget' ),
-            array( 'description' => esc_html__( 'Display feed of different social networks on a sidebar', 'social_bar_widget' ), )
+            'feed_social_sidebar_widget',
+            esc_html__( 'Social Networks sidebar', 'feed_social_sidebar_widget' ),
+            array( 'description' => esc_html__( 'Display feed of different social networks on a sidebar', 'feed_social_sidebar_widget' ), )
         );
     }
 
@@ -127,7 +127,7 @@ class FeedSocialSidebarWidget extends WP_Widget {
             if ( isset($widget_field['default']) ) {
                 $default = $widget_field['default'];
             }
-            $widget_value = ! empty( $instance[$widget_field['id']] ) ? $instance[$widget_field['id']] : esc_html__( $default, 'textdomain' );
+            $widget_value = ! empty( $instance[$widget_field['id']] ) ? $instance[$widget_field['id']] : esc_html__( $default, 'feed_social_sidebar_widget' );
             switch ( $widget_field['type'] ) {
                 case 'checkbox':
                     $output .= '<p>';
@@ -155,13 +155,13 @@ class FeedSocialSidebarWidget extends WP_Widget {
             switch ( $widget_field['type'] ) {
                 case 'checkbox':
                     $instance[$widget_field['id']] = array_key_exists($widget_field['id'], $new_instance);
-                    add_option('social_bar_' . $widget_field['id'], '');
-                    update_option('social_bar_' . $widget_field['id'], array_key_exists($widget_field['id'], $new_instance));
+                    add_option('feed_social_sidebar_' . $widget_field['id'], '');
+                    update_option('feed_social_sidebar_' . $widget_field['id'], array_key_exists($widget_field['id'], $new_instance));
                     break;
                 default:
                     $instance[$widget_field['id']] = ( ! empty( $new_instance[$widget_field['id']] ) ) ? strip_tags( $new_instance[$widget_field['id']] ) : '';
-                    add_option('social_bar_' . $widget_field['id'], '');
-                    update_option('social_bar_' . $widget_field['id'], ( ! empty( $new_instance[$widget_field['id']] ) ) ? strip_tags( $new_instance[$widget_field['id']] ) : '');
+                    add_option('feed_social_sidebar_' . $widget_field['id'], '');
+                    update_option('feed_social_sidebar_' . $widget_field['id'], ( ! empty( $new_instance[$widget_field['id']] ) ) ? strip_tags( $new_instance[$widget_field['id']] ) : '');
             }
         }
         return $instance;

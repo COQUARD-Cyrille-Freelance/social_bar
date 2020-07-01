@@ -13,11 +13,11 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Social bar. If not, see https://www.gnu.org/licenses/old-licenses/gpl-2.0.html.
 */
-namespace SOCIAL_BAR;
+namespace FEED_SOCIAL_SIDEBAR;
 
-use SOCIAL_BAR\Proxies\FeedPinterest;
-use SOCIAL_BAR\Proxies\FeedTwitter;
-use SOCIAL_BAR\Traits\Singleton;
+use FEED_SOCIAL_SIDEBAR\Proxies\FeedPinterest;
+use FEED_SOCIAL_SIDEBAR\Proxies\FeedTwitter;
+use FEED_SOCIAL_SIDEBAR\Traits\Singleton;
 use WP_Error;
 use WP_REST_Request;
 
@@ -41,7 +41,7 @@ class API {
     {
         $nonce_tick = ceil(time() / 86400);
 
-        return substr( wp_hash( $nonce_tick . '|social_bar_api|' . $user_id , 'nonce' ), -12, 10 );
+        return substr( wp_hash( $nonce_tick . '|feed_social_sidebar_api|' . $user_id , 'nonce' ), -12, 10 );
     }
 
     /**
@@ -77,7 +77,7 @@ class API {
         register_rest_route( 'social_bar', '/twitter/feed', array(
             'methods' => 'GET',
             'callback' => function(WP_REST_Request $request){
-                return (new FeedTwitter(get_option("social_bar_twitter_application_id"), get_option("social_bar_twitter_application_secret"), get_option('social_bar_twitter_access_token_id'), get_option('social_bar_twitter_access_token_secret')))->getList($request->get_params());
+                return (new FeedTwitter(get_option("feed_social_sidebar_twitter_application_id"), get_option("feed_social_sidebar_twitter_application_secret"), get_option('feed_social_sidebar_twitter_access_token_id'), get_option('feed_social_sidebar_twitter_access_token_secret')))->getList($request->get_params());
             },
             'args' => array(),
             'permission_callback' => array($this, 'permissionPublic'),
@@ -111,7 +111,7 @@ class API {
 
         //if (!$result && !IS_DEV) {
         if (!self::verifyNonce($user_nonce, $user_id)) {
-            return new WP_Error( 'social_bar_rest_invalid_nonce',  'Social bar nonce is invalid ('.__LINE__.')', array( 'status' => 403 ) );
+            return new WP_Error( 'feed_social_sidebar_rest_invalid_nonce',  'Feed Social sidebar nonce is invalid ('.__LINE__.')', array( 'status' => 403 ) );
         }
 
         $wp_rest_server->send_header( 'X-User-Nonce', self::createNonce($user_id) );

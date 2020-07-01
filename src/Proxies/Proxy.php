@@ -1,11 +1,11 @@
 <?php
 
-namespace SOCIAL_BAR\Proxies;
+namespace FEED_SOCIAL_SIDEBAR\Proxies;
 
 
 use Exception;
 use GuzzleHttp\Client;
-use SOCIAL_BAR\Proxies\Contracts\ProxyInterface;
+use FEED_SOCIAL_SIDEBAR\Proxies\Contracts\ProxyInterface;
 
 abstract class Proxy implements ProxyInterface
 {

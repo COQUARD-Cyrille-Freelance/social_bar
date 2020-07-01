@@ -13,12 +13,12 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Social bar. If not, see https://www.gnu.org/licenses/old-licenses/gpl-2.0.html.
 */
-namespace SOCIAL_BAR\Proxies;
+namespace FEED_SOCIAL_SIDEBAR\Proxies;
 
 use GuzzleHttp\Exception\GuzzleException;
 use SimpleXMLElement;
 use stdClass;
-use SOCIAL_BAR\Proxies\Contracts\ProxyInterface;
+use FEED_SOCIAL_SIDEBAR\Proxies\Contracts\ProxyInterface;
 
 if ( ! defined( 'ABSPATH' ) ) {
     exit;

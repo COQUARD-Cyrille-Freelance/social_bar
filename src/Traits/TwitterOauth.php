@@ -14,7 +14,7 @@ You should have received a copy of the GNU General Public License
 along with Social bar. If not, see https://www.gnu.org/licenses/old-licenses/gpl-2.0.html.
 */
 
-namespace SOCIAL_BAR\Traits;
+namespace FEED_SOCIAL_SIDEBAR\Traits;
 
 
 use Exception;
